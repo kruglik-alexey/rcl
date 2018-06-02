@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Class extends React.Component {
     render() {
@@ -25,7 +26,14 @@ class Counter extends React.PureComponent {
     }
 }
 
-export default class Root extends React.Component {
+const Connected = connect(() => ({prop: 'Connected'}))(Class);
+
+class Root extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
     render() {
         return (
             <div>
@@ -35,7 +43,16 @@ export default class Root extends React.Component {
                 <Func prop={'Func'}/>
                 <Func prop={'Func1'}/>
                 <Counter prop={'Counter'}/>
+                <Connected store={{
+                    getState: () => {},
+                    subscribe() {},
+                    dispatch() {}
+                }}/>
             </div>
         );
     }
+}
+
+export default function createRoot() {
+    return <Root />;
 }

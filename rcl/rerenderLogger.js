@@ -61,6 +61,16 @@ export function initLogger(react, options) {
     options = Object.assign({}, options || {});
     options.exposeGlobalApi = options.exposeGlobalApi === undefined ? true : options.exposeGlobalApi;
     options.logUnavoidableRerenders = options.logUnavoidableRerenders === undefined ? true : options.logUnavoidableRerenders;
+    options.componentFilter = options.componentFilter === undefined ? () => true : options.componentFilter;
+    options.skipReactRedux = options.skipReactRedux === undefined ? false : options.skipReactRedux;
+
+    if (options.skipReactRedux) {
+        const f = options.componentFilter;
+        const reactReduxPattern = /^(c|C)onnect\(\S*\)$/
+        options.componentFilter = function(name) {
+            return !reactReduxPattern.test(name) && f.apply(this, arguments);
+        };
+    }
 
     const componentMap = new Map();
     api = {
@@ -77,7 +87,9 @@ export function initLogger(react, options) {
 
     const hook = {
         render(id, type, instance, props, state, context) {
-            handleRender(getComponentEntry(id, componentMap), type, props, state, api, options);
+            if (options.componentFilter(getDisplayName(type))) {
+                handleRender(getComponentEntry(id, componentMap), type, props, state, api, options);
+            }
         }
     };
 
