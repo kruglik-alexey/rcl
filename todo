@@ -1,3 +1,4 @@
 react-redux connected component rerender when no store changes and ownProps are shallow equal
 arrays and shallow equal
 func bind in prop (<Child onClick={this.handleClick.bind(this)} />)
+compare html between componentWillUpdate and componentDidUpdate
