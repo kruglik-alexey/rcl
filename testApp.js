@@ -4,10 +4,10 @@ import Root from './jsx/Root';
 import {initLogger, destroyLogger} from './rcl/rerenderLogger';
 
 export function init() {
-    initLogger();
+    initLogger(React);
 
     const div = document.createElement('div');
-    ReactDom.render(<Root />, div);
+    ReactDom.render(React.createElement(Root, {}), div);
     document.body.innerHTML = '';
     document.body.appendChild(div);
 }

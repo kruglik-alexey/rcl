@@ -1,6 +1,7 @@
 {
   "scripts": {
     "w": "parcel index.html",
+    "b": "shx rm ./dist/* & parcel build ./rcl/index.js --out-file rcl.js --detailed-report& shx cp ./rcl/babelPlugin.js ./dist/rcl-babel-plugin.js",
     "jestu": "jest -u"
   },
   "devDependencies": {
@@ -12,7 +13,8 @@
     "jshint": "2.9.5",
     "parcel-bundler": "1.8.1",
     "react": "16.4.0",
-    "react-dom": "16.4.0"
+    "react-dom": "16.4.0",
+    "shx": "^0.2.2"
   },
   "dependencies": {
     "deep-diff": "1.0.1",

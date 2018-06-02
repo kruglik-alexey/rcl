@@ -1,8 +1,5 @@
-import React from 'react';
 import {interceptComponent} from './componentInterceptor';
 import {getDisplayName, debugLog} from './utils';
-
-let nextInstanceId = 0;
 
 const defaultHook = {
     render(id, type, instance, props, state, context) {
@@ -10,45 +7,48 @@ const defaultHook = {
     }
 };
 
-function patchCreateElement(hooks) {
-    if (React.__createElement) {
+function patchReact(react, hooks) {
+    if (react.__createElement) {
         throw new Error('Seems like React is already patched');
     }
 
     const interceptionCache = new Map();
     hooks = hooks !== undefined ? hooks.concat(defaultHook) : [defaultHook];
 
-    React.__createElement = function(id, type) {
+    react.__createElement = function(id, type) {
         const args = Array.from(arguments);
         args.shift();
         args[0] = interceptComponent(id, type, interceptionCache, hooks);
-        return React.createElement.apply(React, args);
+        return react.createElement.apply(react, args);
     };
 
     debugLog('Patched React');
+
+    return react;
 }
 
-function unpatchCreateElement () {
-    if (!React.__createElement) {
+function unpatchReact(react) {
+    if (!react.__createElement) {
         throw new Error('Seems like React is not patched');
     }
 
-    React.__createElement = undefined;
+    react.__createElement = undefined;
     debugLog('Unpatched React');
 }
 
 let initialized = false;
+let patchedReact = null;
 
-export function initRcl(hooks) {
+export function initRcl(react, hooks) {
     if (initialized) {
         destroyRcl();
     }
-    patchCreateElement(hooks);
+    patchedReact = patchReact(react, hooks);
     initialized = true;
 }
 
 export function destroyRcl() {
     if (!initialized) return;
-    unpatchCreateElement();
+    unpatchReact(patchedReact);
     initialized = false;
 }

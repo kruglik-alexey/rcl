@@ -57,7 +57,7 @@ function handleRender(entry, type, props, state, api, options) {
 let exposedGlobalApi = false;
 let api = null;
 
-export function initLogger(options) {
+export function initLogger(react, options) {
     options = Object.assign({}, options || {});
     options.exposeGlobalApi = options.exposeGlobalApi === undefined ? true : options.exposeGlobalApi;
     options.logUnavoidableRerenders = options.logUnavoidableRerenders === undefined ? true : options.logUnavoidableRerenders;
@@ -81,7 +81,7 @@ export function initLogger(options) {
         }
     };
 
-    initRcl([hook]);
+    initRcl(react, [hook]);
 
     exposedGlobalApi = false;
     if (options.exposeGlobalApi) {
