@@ -18,10 +18,10 @@ function handleUnavoidableRerender(type, prev, curr, propsEquality, stateEqualit
     if (options.logUnavoidableRerenders) {
         console.groupCollapsed(`%cUnavoidable rerender: ${getDisplayName(type)}`, 'color: grey;');
         if (propsEquality === eq.NOT_EQ) {
-            diffLogger(prev.props, curr.props, console, false, 'props');
+            //diffLogger(prev.props, curr.props, console, false, 'props');
         }
         if (stateEquality === eq.NOT_EQ) {
-            diffLogger(prev.state, curr.state, console, false, 'state');
+            //diffLogger(prev.state, curr.state, console, false, 'state');
         }
         console.groupEnd();
     }
