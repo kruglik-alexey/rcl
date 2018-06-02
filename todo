@@ -3,3 +3,9 @@ arrays and shallow equal
 func bind in prop (<Child onClick={this.handleClick.bind(this)} />)
 compare html between componentWillUpdate and componentDidUpdate
 https://github.com/OliverJAsh/shallow-equal-explain
+
+With an event like onToggle, why is Sidebar even diffing it? There are only two reasons to include a prop in the shouldComponentUpdate diff:
+You use the prop to render.
+You use the prop to perform a side-effect in componentWillReceiveProps, componentDidUpdate, or componentWillUpdate.
+Most on<whatever> props do not meet either of these requirements.
+
