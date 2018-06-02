@@ -1,0 +1,2 @@
+react-redux connected component rerender when no store changes and ownProps are shallow equal
+arrays and shallow equal
