@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`classTestCase 1`] = `
+"
+export default class Root extends React.Component {
+    render() {
+        return React.createElement('div', null, React.createElement('button', { onClick: () => this.setState({}) }, 'Hi'), React.__createElement(1, Class, { prop: 'Class' }), React.__createElement(2, PureClass, { prop: 'PureClass' }), React.__createElement(3, Func, null), React.__createElement(4, Func, { prop: 'Func1' }));
+    }
+}"
+`;
+
+exports[`funcTestCase 1`] = `
+"
+export default class Root extends React.Component {
+    render() {
+        return React.createElement('div', null, React.createElement('button', { onClick: () => this.setState({}) }, 'Hi'), React.__createElement(5, Class, { prop: 'Class' }), React.__createElement(6, PureClass, { prop: 'PureClass' }), React.__createElement(7, Func, null), React.__createElement(8, Func, { prop: 'Func1' }));
+    }
+}"
+`;
