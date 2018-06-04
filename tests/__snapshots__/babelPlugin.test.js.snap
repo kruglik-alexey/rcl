@@ -1,19 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`classTestCase 1`] = `
-"
-export default class Root extends React.Component {
-    render() {
-        return React.createElement('div', null, React.createElement('button', { onClick: () => this.setState({}) }, 'Hi'), React.__createElement(1, Class, { prop: 'Class' }), React.__createElement(2, PureClass, { prop: 'PureClass' }), React.__createElement(3, Func, null), React.__createElement(4, Func, { prop: 'Func1' }));
-    }
-}"
-`;
+exports[`should be awesome 1`] = `
+"var _arguments = arguments,
+    _this = this;
 
-exports[`funcTestCase 1`] = `
-"
-export default class Root extends React.Component {
-    render() {
-        return React.createElement('div', null, React.createElement('button', { onClick: () => this.setState({}) }, 'Hi'), React.__createElement(5, Class, { prop: 'Class' }), React.__createElement(6, PureClass, { prop: 'PureClass' }), React.__createElement(7, Func, null), React.__createElement(8, Func, { prop: 'Func1' }));
-    }
-}"
+class Foo1 {
+  render() {
+    const _thisId = (arguments[0] === undefined ? this.props : arguments[0]).__rclId__ + '_';
+
+    return React.__createElement(_thisId + \\"1\\", A, null, React.__createElement(_thisId + \\"2\\", B, null));
+  }
+
+}
+
+const foo2 = {
+  render() {
+    const _thisId2 = (arguments[0] === undefined ? this.props : arguments[0]).__rclId__ + '_';
+
+    return React.__createElement(_thisId2 + \\"3\\", A, null, React.__createElement(_thisId2 + \\"4\\", B, null));
+  }
+
+};
+
+const foo3 = {
+  render: function () {
+    const _thisId3 = (arguments[0] === undefined ? this.props : arguments[0]).__rclId__ + '_';
+
+    return React.__createElement(_thisId3 + \\"5\\", A, null, React.__createElement(_thisId3 + \\"6\\", B, null));
+  }
+};
+
+function Foo4() {
+  const _thisId4 = (arguments[0] === undefined ? this.props : arguments[0]).__rclId__ + '_';
+
+  return React.__createElement(_thisId4 + \\"7\\", A, null, React.__createElement(_thisId4 + \\"8\\", B, null));
+}
+
+const foo5 = function () {
+  const _thisId5 = (arguments[0] === undefined ? this.props : arguments[0]).__rclId__ + '_';
+
+  return React.__createElement(_thisId5 + \\"9\\", A, null, React.__createElement(_thisId5 + \\"10\\", B, null));
+};
+
+const foo6 = () => {
+  const _thisId6 = (_arguments[0] === undefined ? _this.props : _arguments[0]).__rclId__ + '_';
+
+  return React.__createElement(_thisId6 + \\"11\\", A, null, React.__createElement(_thisId6 + \\"12\\", B, null));
+};
+
+const foo7 = () => {
+  const _thisId7 = (_arguments[0] === undefined ? _this.props : _arguments[0]).__rclId__ + '_';
+
+  return React.__createElement(_thisId7 + \\"15\\", A, null, React.__createElement(_thisId7 + \\"16\\", B, null));
+};"
 `;
