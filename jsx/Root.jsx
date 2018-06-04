@@ -26,6 +26,24 @@ class Counter extends React.PureComponent {
     }
 }
 
+class List extends React.Component {
+    render() {
+        return (
+            <div>
+                <Func key="1" prop="Func1"/>
+                <Func key="2" prop="Func2"/>
+                <Func key="3" prop="Func3"/>
+            </div>
+        );
+    }
+}
+
+class Nested extends React.Component {
+    render() {
+        return <Class prop="NestedClass"/>
+    }
+}
+
 const Connected = connect(() => ({prop: 'Connected'}))(Class);
 
 class Root extends React.Component {
@@ -48,6 +66,9 @@ class Root extends React.Component {
                     subscribe() {},
                     dispatch() {}
                 }}/>
+                <List />
+                <Nested />
+                <Nested />
             </div>
         );
     }
