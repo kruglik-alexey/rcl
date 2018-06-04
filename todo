@@ -9,3 +9,6 @@ You use the prop to render.
 You use the prop to perform a side-effect in componentWillReceiveProps, componentDidUpdate, or componentWillUpdate.
 Most on<whatever> props do not meet either of these requirements.
 
+measure time in render
+measure time in mapStateToPros etc
+measure ratio of shouldComponentUpdate false results
