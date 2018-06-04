@@ -64,12 +64,12 @@ export default function diffLogger(prevState, newState, logger, isCollapsed, nam
       logger.log(`%c ${dictionary[kind].text}`, style(kind), ...output);
     });
   } else {
-    logger.log('вЂ”вЂ” no diff вЂ”вЂ”');
+    logger.log('—— no diff ——');
   }
 
   try {
     logger.groupEnd();
   } catch (e) {
-    logger.log('вЂ”вЂ” diff end вЂ”вЂ” ');
+    logger.log('—— diff end —— ');
   }
 }

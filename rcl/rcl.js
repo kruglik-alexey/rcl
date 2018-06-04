@@ -15,9 +15,13 @@ function patchReact(react, hooks) {
     const interceptionCache = new Map();
     hooks = hooks !== undefined ? hooks.concat(defaultHook) : [defaultHook];
 
-    react.__createElement = function(id, type) {
+    react.__createElement = function(id, type, props) {
         const args = Array.from(arguments);
         args.shift();
+
+        if (props && props.key) {
+            id = id + '_' + props.key;
+        }
         args[0] = interceptComponent(id, type, interceptionCache, hooks);
         return react.createElement.apply(react, args);
     };
