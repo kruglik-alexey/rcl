@@ -14,27 +14,27 @@ function getComponentEntry(id, componentMap) {
     return entry;
 }
 
-function handleUnavoidableRerender(type, prev, curr, propsEquality, stateEquality, options) {
+function handleUnavoidableRerender(type, instance, prev, curr, propsEquality, stateEquality, options) {
     if (options.logUnavoidableRerenders) {
-        console.groupCollapsed(`%cUnavoidable rerender: ${getDisplayName(type)}`, 'color: grey;');
+        console.groupCollapsed(`%cUnavoidable rerender: ${getDisplayName(type, instance)}`, 'color: grey;');
         if (propsEquality === eq.NOT_EQ) {
-            //diffLogger(prev.props, curr.props, console, false, 'props');
+            diffLogger(prev.props, curr.props, console, false, 'props');
         }
         if (stateEquality === eq.NOT_EQ) {
-            //diffLogger(prev.state, curr.state, console, false, 'state');
+            diffLogger(prev.state, curr.state, console, false, 'state');
         }
         console.groupEnd();
     }
 }
 
-function handleAvoidableRerender(type, prev, curr, propsEquality, stateEquality, options) {
-    console.groupCollapsed(`%cAvoidable rerender: ${getDisplayName(type)}`, 'color: brown');
+function handleAvoidableRerender(type, instance, prev, curr, propsEquality, stateEquality, options) {
+    console.groupCollapsed(`%cAvoidable rerender: ${getDisplayName(type, instance)}`, 'color: brown');
     console.warn(`Props are ${eq.equalityDescriptions[propsEquality]}:`, curr.props);
     console.warn(`State are ${eq.equalityDescriptions[stateEquality]}:`, curr.state);
     console.groupEnd();
 }
 
-function handleRender(entry, type, props, state, api, options) {
+function handleRender(entry, type, instance, props, state, api, options) {
     const curr = {props, state};
     entry.history.push(curr);
     if (entry.history.length === 1) return;
@@ -47,10 +47,10 @@ function handleRender(entry, type, props, state, api, options) {
     api.rerenderCount++;
     if (propsEquality === eq.NOT_EQ || stateEquality === eq.NOT_EQ) {
         api.unavoidableRerenderCount++;
-        handleUnavoidableRerender(type, prev, curr, propsEquality, stateEquality, options);
+        handleUnavoidableRerender(type, instance, prev, curr, propsEquality, stateEquality, options);
     } else {
         api.avoidableRerenderCount++;
-        handleAvoidableRerender(type, prev, curr, propsEquality, stateEquality, options);
+        handleAvoidableRerender(type, instance, prev, curr, propsEquality, stateEquality, options);
     }
 }
 
@@ -87,8 +87,8 @@ export function initLogger(react, options) {
 
     const hook = {
         render(id, type, instance, props, state, context) {
-            if (options.componentFilter(getDisplayName(type))) {
-                handleRender(getComponentEntry(id, componentMap), type, props, state, api, options);
+            if (options.componentFilter(getDisplayName(type, instance))) {
+                handleRender(getComponentEntry(id, componentMap), type, instance, props, state, api, options);
             }
         }
     };
