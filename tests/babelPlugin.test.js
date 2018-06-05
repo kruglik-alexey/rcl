@@ -2,12 +2,28 @@ const babel = require('babel-core');
 const plugin = require('../rcl/babelPlugin');
 
 const testCase = `
+import Foo from 'foo';
+
+const foo0 = React.createElement(
+  A,
+  null,
+  React.createElement(
+    "div",
+    null,
+    React.createElement(B, null)
+  )
+);
+
 class Foo1 {
   render() {
     return React.createElement(
       A,
       null,
-      React.createElement(B, null)
+      React.createElement(
+        "div",
+        null,
+        React.createElement(B, null)
+      )
     );
   }
 }
@@ -17,7 +33,11 @@ const foo2 = {
     return React.createElement(
       A,
       null,
-      React.createElement(B, null)
+      React.createElement(
+        "div",
+        null,
+        React.createElement(B, null)
+      )
     );
   }
 }
@@ -27,7 +47,11 @@ const foo3 = {
     return React.createElement(
       A,
       null,
-      React.createElement(B, null)
+      React.createElement(
+        "div",
+        null,
+        React.createElement(B, null)
+      )
     );
   }
 }
@@ -36,7 +60,11 @@ function Foo4() {
   return React.createElement(
     A,
     null,
-    React.createElement(B, null)
+    React.createElement(
+      "div",
+      null,
+      React.createElement(B, null)
+    )
   );
 }
 
@@ -44,7 +72,11 @@ const foo5 = function () {
   return React.createElement(
     A,
     null,
-    React.createElement(B, null)
+    React.createElement(
+      "div",
+      null,
+      React.createElement(B, null)
+    )
   );
 };
 
@@ -52,14 +84,22 @@ const foo6 = () => {
   return React.createElement(
     A,
     null,
-    React.createElement(B, null)
+    React.createElement(
+      "div",
+      null,
+      React.createElement(B, null)
+    )
   );
 };
 
 const foo7 = () => React.createElement(
   A,
   null,
-  React.createElement(B, null)
+  React.createElement(
+    "div",
+    null,
+    React.createElement(B, null)
+  )
 );
 `;
 

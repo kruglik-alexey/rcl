@@ -1,4 +1,5 @@
 import {getDisplayName, isClassComponent, debugLog} from './utils';
+import React from 'react';
 
 function callHooks(hooks, callbackName, args) {
     for (let i = 0; i < hooks.length; i++) {
@@ -11,7 +12,7 @@ function interceptClassComponent(id, type, hooks) {
     return class extends type {
         render() {
             callHooks(hooks, 'render', [id, type, this, this.props, this.state, this.context]);
-            return super.render();
+            return React.createElement('div', null, id, super.render());
         }
     };
 }
@@ -20,7 +21,7 @@ function interceptFunctionalComponent(id, type, hooks) {
     return function(props, context) {
         // Pass func as both type and instance
         callHooks(hooks, 'render', [id, type, type, props, null, context]);
-        return type.apply(this, arguments);
+        return React.createElement('div', null, id, type.apply(this, arguments));
     };
 }
 
