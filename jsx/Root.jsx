@@ -3,17 +3,19 @@ import {connect} from 'react-redux';
 
 class Class extends React.Component {
     render() {
-        return this.props.prop;
+        return 'Class';
     }
 }
 
 class PureClass extends React.PureComponent {
     render() {
-        return this.props.prop;
+        return 'PureClass';
     }
 }
 
-const Func = ({prop}) => prop;
+const Func = () => 'Func';
+const NestedFunc = () => <Func />;
+const SuperNestedFunc = () => <NestedFunc />;
 
 class Counter extends React.PureComponent {
     constructor(props) {
@@ -30,9 +32,9 @@ class List extends React.Component {
     render() {
         return (
             <div>
-                <Func key="1" prop="Func1"/>
-                <Func key="2" prop="Func2"/>
-                <Func key="3" prop="Func3"/>
+                <Func />
+                <Func />
+                <Func />
             </div>
         );
     }
@@ -40,11 +42,32 @@ class List extends React.Component {
 
 class Nested extends React.Component {
     render() {
-        return <Class prop="NestedClass"/>
+        return <Class />
+    }
+}
+
+class SuperNested extends React.Component {
+    render() {
+        return <Nested />
     }
 }
 
 const Connected = connect(() => ({prop: 'Connected'}))(Class);
+
+// TODO will confuse them as same component
+function ArrayWOKeys() {
+    return [1,2,3].map(i => <Class />);
+}
+
+function ArrayWKeys() {
+    return [1,2,3].map(i => <Class key={i}/>);
+}
+
+// same for keys on Class
+// same for funcs
+function ArrayWKeysOnNative() {
+    return [1,2,3].map(i => <div key={i}><Class /></div>);
+}
 
 class Root extends React.Component {
     constructor(props) {
@@ -56,11 +79,15 @@ class Root extends React.Component {
         return (
             <div>
                 <button onClick={() => this.setState({})}>Hi</button>
-                <Class prop={'Class'} />
-                <PureClass prop={'PureClass'}/>
-                <Func prop={'Func'}/>
-                <Func prop={'Func1'}/>
-                <Counter prop={'Counter'}/>
+                <Class />
+                <PureClass />
+                <Func />
+                <NestedFunc />
+                <SuperNestedFunc />
+                {Func()}
+                {NestedFunc()}
+                {SuperNestedFunc()}
+                <Counter />
                 <Connected store={{
                     getState: () => {},
                     subscribe() {},
@@ -69,6 +96,10 @@ class Root extends React.Component {
                 <List />
                 <Nested />
                 <Nested />
+                <SuperNested />
+                <SuperNested />
+                <ArrayWKeys />
+                <ArrayWKeysOnNative />
             </div>
         );
     }

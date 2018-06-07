@@ -12,3 +12,5 @@ Most on<whatever> props do not meet either of these requirements.
 measure time in render
 measure time in mapStateToPros etc
 measure ratio of shouldComponentUpdate false results
+
+support arrays wo keys (or not?)

@@ -4,37 +4,37 @@ exports[`should be awesome 1`] = `
 "
 import Foo from 'foo';
 
-const foo0 = React.__createElement(1, 1, A, null, React.__createElement(-1, 1, \\"div\\", null, React.__createElement(2, 1, B, null)));
+const foo0 = React.__createElement(1, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(2, B, null)));
 
 class Foo1 {
   render() {
-    return React.__createElement(3, 2, A, null, React.__createElement(-1, 2, \\"div\\", null, React.__createElement(4, 2, B, null)));
+    return React.__createElement(3, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(4, B, null)));
   }
 }
 
 const foo2 = {
   render() {
-    return React.__createElement(5, 3, A, null, React.__createElement(-1, 3, \\"div\\", null, React.__createElement(6, 3, B, null)));
+    return React.__createElement(5, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(6, B, null)));
   }
 };
 
 const foo3 = {
   render: function () {
-    return React.__createElement(7, 4, A, null, React.__createElement(-1, 4, \\"div\\", null, React.__createElement(8, 4, B, null)));
+    return React.__createElement(7, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(8, B, null)));
   }
 };
 
 function Foo4() {
-  return React.__createElement(9, 5, A, null, React.__createElement(-1, 5, \\"div\\", null, React.__createElement(10, 5, B, null)));
+  return React.__createElement(9, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(10, B, null)));
 }
 
 const foo5 = function () {
-  return React.__createElement(11, 6, A, null, React.__createElement(-1, 6, \\"div\\", null, React.__createElement(12, 6, B, null)));
+  return React.__createElement(11, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(12, B, null)));
 };
 
 const foo6 = () => {
-  return React.__createElement(13, 7, A, null, React.__createElement(-1, 7, \\"div\\", null, React.__createElement(14, 7, B, null)));
+  return React.__createElement(13, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(14, B, null)));
 };
 
-const foo7 = () => React.__createElement(15, 8, A, null, React.__createElement(-1, 8, \\"div\\", null, React.__createElement(16, 8, B, null)));"
+const foo7 = () => React.__createElement(15, A, null, React.__createElement(-1, \\"div\\", null, React.__createElement(16, B, null)));"
 `;
