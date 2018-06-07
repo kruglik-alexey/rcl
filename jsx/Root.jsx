@@ -28,6 +28,12 @@ class Counter extends React.PureComponent {
     }
 }
 
+class Conainer extends React.Component {
+    render() {
+        return this.props.children;
+    }
+}
+
 class List extends React.Component {
     render() {
         return (
@@ -69,6 +75,14 @@ function ArrayWKeysOnNative() {
     return [1,2,3].map(i => <div key={i}><Class /></div>);
 }
 
+function ArrayWKeysOnNested() {
+    return [1,2,3].map(i => <Nested key={i}/>);
+}
+
+function ArrayWKeysOnFuncs() {
+    return [1,2,3].map(i => <Func key={i}/>);
+}
+
 class Root extends React.Component {
     constructor(props) {
         super(props);
@@ -100,6 +114,20 @@ class Root extends React.Component {
                 <SuperNested />
                 <ArrayWKeys />
                 <ArrayWKeysOnNative />
+                {ArrayWKeysOnNative()}
+                <ArrayWKeysOnNested />
+                {ArrayWKeysOnNested()}
+                <ArrayWKeysOnFuncs />
+                {ArrayWKeysOnFuncs()}
+
+                <Conainer>
+                    <SuperNested />
+                    <SuperNested />
+                </Conainer>
+
+                <Conainer>
+                    {ArrayWKeysOnNested()}
+                </Conainer>
             </div>
         );
     }

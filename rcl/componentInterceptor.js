@@ -25,7 +25,7 @@ function setParentId(tree, parentId) {
     }
 
     if (tree.props !== null && tree.props.children !== undefined) {
-        const id = tree.props.key !== undefined ? parentId+ '/' + tree.props.key : parentId;
+        const id = tree.key !== null ? parentId+ '/' + tree.key : parentId;
         if (Array.isArray(tree.props.children)) {
             tree.props.children = tree.props.children.map(c => setParentId(c, id));
         } else {
