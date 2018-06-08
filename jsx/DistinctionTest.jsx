@@ -93,46 +93,19 @@ class Root extends React.Component {
         return (
             <div>
                 <button onClick={() => this.setState({})}>Hi</button>
-                <Class />
-                <PureClass />
-                <Func />
-                <NestedFunc />
-                <SuperNestedFunc />
-                {Func()}
-                {NestedFunc()}
-                {SuperNestedFunc()}
-                <Counter />
-                <Connected store={{
-                    getState: () => {},
-                    subscribe() {},
-                    dispatch() {}
-                }}/>
-                <List />
-                <Nested />
-                <Nested />
-                <SuperNested />
-                <SuperNested />
-                <ArrayWKeys />
-                <ArrayWKeysOnNative />
-                {ArrayWKeysOnNative()}
-                <ArrayWKeysOnNested />
-                {ArrayWKeysOnNested()}
-                <ArrayWKeysOnFuncs />
-                {ArrayWKeysOnFuncs()}
+
 
                 <Conainer>
                     <SuperNested />
                     <SuperNested />
                 </Conainer>
 
-                <Conainer>
-                    {ArrayWKeysOnNested()}
-                </Conainer>
+
             </div>
         );
     }
 }
 
-export default function createRoot() {
+export default function create() {
     return <Root />;
 }

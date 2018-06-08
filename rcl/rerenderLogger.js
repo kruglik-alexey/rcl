@@ -14,14 +14,33 @@ function getComponentEntry(id, componentMap) {
     return entry;
 }
 
+function diffFilter(a, b) {
+    /*function get(x, path) {
+        return path.reduce((acc, v) => acc ? acc[v] : null, x);
+    }*/
+
+    return function(path, key) {
+        return path.length >= 5;
+
+       /* const p = path.concat(['$$typeof']);
+        const aType = get(a, p);
+        if (aType && aType.toString() === 'Symbol(react.element)') return true;
+
+        const bType = get(b, p);
+        if (bType && bType.toString() === 'Symbol(react.element)') return true;
+
+        return false;*/
+    }
+}
+
 function handleUnavoidableRerender(type, instance, prev, curr, propsEquality, stateEquality, options) {
     if (options.logUnavoidableRerenders) {
         console.groupCollapsed(`%cUnavoidable rerender: ${getDisplayName(type, instance)}`, 'color: grey;');
         if (propsEquality === eq.NOT_EQ) {
-            diffLogger(prev.props, curr.props, console, false, 'props');
+            diffLogger(prev.props, curr.props, console, false, 'props', diffFilter(prev.props, curr.props));
         }
         if (stateEquality === eq.NOT_EQ) {
-            diffLogger(prev.state, curr.state, console, false, 'state');
+            diffLogger(prev.state, curr.state, console, false, 'state', diffFilter(prev.state, curr.state));
         }
         console.groupEnd();
     }
