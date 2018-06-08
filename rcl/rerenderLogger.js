@@ -63,6 +63,7 @@ export function initLogger(react, options) {
     options.logUnavoidableRerenders = options.logUnavoidableRerenders === undefined ? true : options.logUnavoidableRerenders;
     options.componentFilter = options.componentFilter === undefined ? () => true : options.componentFilter;
     options.skipReactRedux = options.skipReactRedux === undefined ? false : options.skipReactRedux;
+    options.addIdTooltip = options.addIdTooltip === undefined ? false : options.addIdTooltip;
 
     if (options.skipReactRedux) {
         const f = options.componentFilter;
@@ -93,7 +94,7 @@ export function initLogger(react, options) {
         }
     };
 
-    initRcl(react, [hook]);
+    initRcl(react, [hook], {addIdTooltip: options.addIdTooltip});
 
     exposedGlobalApi = false;
     if (options.exposeGlobalApi) {

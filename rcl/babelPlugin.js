@@ -1,8 +1,8 @@
 const rclCreateElementName = '__createElement';
 const nativeElementId = -1;
-let nextInstanceId = 1;
 
 module.exports = function(babel) {
+    let nextInstanceId = 1;
     const t = babel.types;
     const rclCreateElementNameIdentifier = t.identifier(rclCreateElementName);
 

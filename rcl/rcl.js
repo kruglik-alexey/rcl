@@ -7,7 +7,7 @@ const defaultHook = {
     }
 };
 
-function patchReact(react, hooks) {
+function patchReact(react, hooks, options) {
     if (react.__createElement) {
         throw new Error('Seems like React is already patched');
     }
@@ -23,7 +23,7 @@ function patchReact(react, hooks) {
             if (props && props.key !== undefined) {
                 id = id + '/' + props.key;
             }
-            args[0] = interceptComponent(id, type, interceptionCache, hooks);
+            args[0] = interceptComponent(id, type, interceptionCache, hooks, options);
         }
 
         return react.createElement.apply(react, args);
@@ -46,11 +46,11 @@ function unpatchReact(react) {
 let initialized = false;
 let patchedReact = null;
 
-export function initRcl(react, hooks) {
+export function initRcl(react, hooks, options) {
     if (initialized) {
         destroyRcl();
     }
-    patchedReact = patchReact(react, hooks);
+    patchedReact = patchReact(react, hooks, options);
     initialized = true;
 }
 

@@ -4,7 +4,7 @@ import createRoot from './jsx/Root';
 import {initLogger, destroyLogger} from './rcl/rerenderLogger';
 
 export function init() {
-    initLogger(React, {skipReactRedux: true});
+    initLogger(React, {skipReactRedux: true, addIdTooltip: true});
 
     const div = document.createElement('div');
     ReactDom.render(createRoot(), div);
