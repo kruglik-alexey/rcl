@@ -1,6 +1,8 @@
 import {getDisplayName, isClassComponent, debugLog} from './utils';
 import React from 'react';
 
+const parentIdProp = '__parentId';
+
 function callHooks(hooks, callbackName, args) {
     for (let i = 0; i < hooks.length; i++) {
         const callback = hooks[i][callbackName];
@@ -21,7 +23,7 @@ function setParentId(tree, parentId) {
 
     if (typeof tree.type === 'function') {
         // do not set prop for native elements as it casue error in react
-        tree.props.__parentId = parentId;
+        tree.props[parentIdProp] = parentId;
     }
 
     if (tree.props !== null && tree.props.children !== undefined) {
@@ -44,7 +46,7 @@ function addIdTooltip(tree, id) {
 function interceptClassComponent(id, type, hooks, options) {
     return class extends type {
         render() {
-            const totalId = (this.props.__parentId || '') + '_' + id;
+            const totalId = (this.props[parentIdProp] || '') + '_' + id;
             callHooks(hooks, 'render', [totalId, type, this, this.props, this.state, this.context]);
             let tree = super.render();
             tree = setParentId(tree, totalId);
@@ -59,7 +61,7 @@ function interceptClassComponent(id, type, hooks, options) {
 function interceptFunctionalComponent(id, type, hooks, options) {
     return function(props, context) {
         // Pass func as both type and instance
-        const totalId = ((props && props.__parentId) || '') + '_' + id;
+        const totalId = ((props && props[parentIdProp]) || '') + '_' + id;
         callHooks(hooks, 'render', [totalId, type, type, props, null, context]);
         let tree = type.apply(this, arguments);
         tree = setParentId(tree, totalId);
@@ -72,6 +74,7 @@ function interceptFunctionalComponent(id, type, hooks, options) {
 
 export function interceptComponent(id, type, interceptionCache, hooks, options) {
     let intercepted = interceptionCache.get(id);
+    // TODO remove cache
     if (intercepted === undefined || true) {
         debugLog(`Intercepting ${getDisplayName(type)}:${id}`);
         intercepted = isClassComponent(type) ?
